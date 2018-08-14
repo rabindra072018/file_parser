@@ -1,6 +1,6 @@
 from SequenceGenerator import SequenceGenerator
-
 from bullet_generator import *
+import sys
 
 
 def get_dot_alignment(alignment=None):
@@ -10,24 +10,26 @@ def get_dot_alignment(alignment=None):
     return final_string
 
 
-def main():
+def main(text=None):
     #l = ["*", "*", ".", "..", "...", "*", "**", "**", "***", "***", "***", "**", "*", "**", "**", "***"]
 
     #print(get_bullet(create_bullet(l)))
 
-    text = '* This is an outline ' \
-           '. Its not a very good outline1' \
-           '.. Its not a very good outline2' \
-           '... Its not a very good outline3' \
-           '* This is the second numbered item in the outline ' \
-           '** Lots ' \
-           '** Less Numbers' \
-           '*** Level 3 Star' \
-           '. Its not a very good outline50' \
-           '. Its not a very good outline51' \
-           '. Its not a very good outline52' \
-           '*** Level 3 Star2' \
-           '** Level 22'
+    # text = '* This is an outline ' \
+    #        '. Its not a very good outline1' \
+    #        '.. Its not a very good outline2' \
+    #        '... Its not a very good outline3' \
+    #        '* This is the second numbered item in the outline ' \
+    #        '** Lots ' \
+    #        '** Less Numbers' \
+    #        '*** Level 3 Star' \
+    #        '. Its not a very good outline50' \
+    #        '. Its not a very good outline51' \
+    #        '. Its not a very good outline52' \
+    #        '*** Level 3 Star2' \
+    #        '** Level 22'
+
+
     sq = SequenceGenerator(text=text)
     sq.parse()
     tokens = sq.token_list
@@ -50,9 +52,12 @@ def main():
                 text_line = bullet + " " + token.token
             elif last_tok_type == "dots":
                 text_line = align_ment + token.token
-
+            text_line = text_line.strip('\n')
             print(text_line)
 
-
 if __name__ == '__main__':
-    main()
+    out_str = ""
+    for data in sys.stdin:
+        out_str += data
+    main(text=out_str)
+
