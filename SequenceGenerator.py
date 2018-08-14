@@ -1,3 +1,8 @@
+class Token:
+    def __init__(self, token=None, tok_type=None):
+        self.token = token
+        self.tok_type = tok_type
+
 
 class SequenceGenerator:
     token_list = []
@@ -32,14 +37,16 @@ class SequenceGenerator:
         while self.curr_index < len(self.input_text) and self.input_text[self.curr_index] == "*":
             stars = stars + self.input_text[self.curr_index]
             self.curr_index += 1
-        self.token_list.append(stars)
+        token_object = Token(token=stars, tok_type="token")
+        self.token_list.append(token_object)
 
     def dots_collector(self):
         dots = ""
         while self.curr_index < len(self.input_text) and self.input_text[self.curr_index] == ".":
             dots = dots + self.input_text[self.curr_index]
             self.curr_index += 1
-        self.token_list.append(dots)
+        token_object = Token(token=dots, tok_type="token")
+        self.token_list.append(token_object)
 
     def texts_collector(self):
         texts = ""
@@ -48,4 +55,5 @@ class SequenceGenerator:
                 self.input_text[self.curr_index] != ".":
             texts = texts + self.input_text[self.curr_index]
             self.curr_index += 1
-        self.token_list.append(texts)
+        token_object = Token(token=texts, tok_type="text")
+        self.token_list.append(token_object)

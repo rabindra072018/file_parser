@@ -26,7 +26,7 @@ class Node:
         sibling.previous = self
 
 
-def get_bullet(input_string=[]):
+def create_bullet(input_string=[]):
     tree = []
     root = Node()
     root.children = tree
@@ -69,7 +69,8 @@ def get_bullet(input_string=[]):
         last_token = curr_token
     return last_node
 
-def print_tree(node=Node):
+
+def get_bullet(node=Node):
     next_node = node
     out_str = ""
     while next_node is not None:
@@ -77,7 +78,7 @@ def print_tree(node=Node):
         next_node = next_node.parent
         if next_node is not None and next_node.parent is not None:
             out_str += "."
-    print(out_str)
+    return out_str[::-1]
 
 
 def climb_to_sibling(node=Node, dest_token=None):
