@@ -37,7 +37,7 @@ class SequenceGenerator:
         while self.curr_index < len(self.input_text) and self.input_text[self.curr_index] == "*":
             stars = stars + self.input_text[self.curr_index]
             self.curr_index += 1
-        token_object = Token(token=stars, tok_type="token")
+        token_object = Token(token=stars, tok_type="stars")
         self.token_list.append(token_object)
 
     def dots_collector(self):
@@ -45,7 +45,7 @@ class SequenceGenerator:
         while self.curr_index < len(self.input_text) and self.input_text[self.curr_index] == ".":
             dots = dots + self.input_text[self.curr_index]
             self.curr_index += 1
-        token_object = Token(token=dots, tok_type="token")
+        token_object = Token(token=dots, tok_type="dots")
         self.token_list.append(token_object)
 
     def texts_collector(self):
