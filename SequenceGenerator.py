@@ -2,6 +2,7 @@ class Token:
     def __init__(self, token=None, tok_type=None):
         self.token = token
         self.tok_type = tok_type
+        self.expandable = False
 
 
 class SequenceGenerator:
