@@ -22,24 +22,6 @@ def create_line_shrink(token_list=[]):
 
 
 def main(text=None):
-    # l = ["*", "*", ".", "..", "...", "*", "**", "**", "***", "***", "***", "**", "*", "**", "**", "***"]
-
-    # print(get_bullet(create_bullet(l)))
-
-    # text = '* This is an outline ' \
-    #        '. Its not a very good outline1' \
-    #        '.. Its not a very good outline2' \
-    #        '... Its not a very good outline3' \
-    #        '* This is the second numbered item in the outline ' \
-    #        '** Lots ' \
-    #        '** Less Numbers' \
-    #        '*** Level 3 Star' \
-    #        '. Its not a very good outline50' \
-    #        '. Its not a very good outline51' \
-    #        '. Its not a very good outline52' \
-    #        '*** Level 3 Star2' \
-    #        '** Level 22'
-
     sq = SequenceGenerator(text=text)
     sq.parse()
     tokens = sq.token_list
@@ -85,12 +67,12 @@ def func_test():
 
 
 if __name__ == '__main__':
-    # out_str = ""
-    # for data in sys.stdin:
-    #     out_str += data
-    # main(text=out_str)
+    out_str = ""
+    for data in sys.stdin:
+        out_str += data
+    main(text=out_str)
 
     # Using file open
-    main(text=open("t1.txt", "r").read())
+    #main(text=open("t1.txt", "r").read())
 
     # func_test()
