@@ -55,14 +55,16 @@ def main(text=None):
             alignment_space = ""
         elif token.tok_type == "dots":
             alignment_space = get_alignment_symbol_and_space(token=token)
-            last_tok_type = "dots"
+            last_tok_type = token.tok_type
         elif token.tok_type == "text":
             if last_tok_type == "stars":
                 bullet = get_bullet(create_bullet(bullets))
                 text_line = bullet + " " + token.token
             elif last_tok_type == "dots":
                 text_line = alignment_space[1] + alignment_space[0] + " " + token.token
-
+            elif last_tok_type == "text":
+                text_line = alignment_space[1] + "  " + token.token
+            last_tok_type = token.tok_type
             text_line = text_line.strip('\n')
             print(text_line)
 
