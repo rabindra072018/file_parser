@@ -1,7 +1,8 @@
-import re
-
-
 class Token:
+    DOTS = "dots"
+    TEXTS = "texts"
+    STARS = "stars"
+
     def __init__(self, token=None, tok_type=None):
         self.token = token
         self.tok_type = tok_type
@@ -41,7 +42,7 @@ class SequenceGenerator:
         while self.curr_index < len(self.input_text) and self.input_text[self.curr_index] == "*":
             stars = stars + self.input_text[self.curr_index]
             self.curr_index += 1
-        token_object = Token(token=stars, tok_type="stars")
+        token_object = Token(token=stars, tok_type=Token.STARS)
         self.token_list.append(token_object)
 
     def dots_collector(self):
@@ -49,7 +50,7 @@ class SequenceGenerator:
         while self.curr_index < len(self.input_text) and self.input_text[self.curr_index] == ".":
             dots = dots + self.input_text[self.curr_index]
             self.curr_index += 1
-        token_object = Token(token=dots, tok_type="dots")
+        token_object = Token(token=dots, tok_type=Token.DOTS)
         self.token_list.append(token_object)
 
     def texts_collector(self):
@@ -63,7 +64,7 @@ class SequenceGenerator:
         texts = texts.lstrip()
         text_string = self.line_spliter(texts)
         for item in text_string:
-            token_object = Token(token=item, tok_type="text")
+            token_object = Token(token=item, tok_type=Token.TEXTS)
             self.token_list.append(token_object)
 
     def line_spliter(self, lines=None):
