@@ -1,3 +1,6 @@
+import re
+
+
 class Token:
     def __init__(self, token=None, tok_type=None):
         self.token = token
@@ -56,5 +59,22 @@ class SequenceGenerator:
                 self.input_text[self.curr_index] != ".":
             texts = texts + self.input_text[self.curr_index]
             self.curr_index += 1
-        token_object = Token(token=texts, tok_type="text")
-        self.token_list.append(token_object)
+
+        texts = texts.lstrip()
+        text_string = self.line_spliter(texts)
+        for item in text_string:
+            token_object = Token(token=item, tok_type="text")
+            self.token_list.append(token_object)
+
+    def line_spliter(self, lines=None):
+        line_list = []
+        temp_line = ""
+        for index in range(len(lines)):
+            if lines[index] == '\n':
+                temp_line += "\n"
+                line_list.append(temp_line)
+                temp_line = ""
+                continue
+            temp_line += lines[index]
+        line_list = list(filter(lambda x: x != "\n", line_list))
+        return line_list
