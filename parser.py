@@ -3,13 +3,14 @@ from bullet_generator import *
 import sys
 
 
-def get_dot_alignment(token=Token):
-    alignment_count = len(token.token)
+def get_alignment_symbol_and_space(token=Token):
     alignment_symbol = "-"
+    alignment_space = ""
     if token.expandable:
         alignment_symbol = "+"
-    final_string = " " * alignment_count + alignment_symbol
-    return final_string
+    alignment_space = " " * len(token.token)
+
+    return alignment_symbol, alignment_space
 
 
 def create_line_shrink(token_list=[]):
@@ -44,7 +45,7 @@ def main(text=None):
     tokens = sq.token_list
     bullets = []
     text_line = ""
-    align_ment = ""
+    alignment_space = ""
     last_tok_type = ""
     final_string_list = []
     create_line_shrink(token_list=tokens)
@@ -54,14 +55,14 @@ def main(text=None):
             last_tok_type = "stars"
             align_ment = ""
         elif token.tok_type == "dots":
-            align_ment = get_dot_alignment(token=token)
+            alignment_space = get_alignment_symbol_and_space(token=token)
             last_tok_type = "dots"
         elif token.tok_type == "text":
             if last_tok_type == "stars":
                 bullet = get_bullet(create_bullet(bullets))
                 text_line = bullet + " " + token.token
             elif last_tok_type == "dots":
-                text_line = align_ment + token.token
+                text_line = alignment_space[1] + alignment_space[0] + token.token
 
             text_line = text_line.strip('\n')
             print(text_line)
